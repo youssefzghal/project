@@ -148,4 +148,85 @@ class transfertCore
     }
 
 
+    function nombreDemandes($login)
+    {
+        $sql="SELECT count(*) from transferts where chauffeur='$login' and etat='Non confirmé' ";
+        $db = config::getConnexion();
+        try
+        {  $liste = $db->query($sql);
+    foreach($liste as $row){ }
+            return $row['count(*)'];
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+
+    function nombreNext($login)
+    {   $dateactuel = date('Y-m-d');
+        $sql="SELECT count(*) from transferts where (etat='Confirmé' and chauffeur='$login'  and date >= '$dateactuel' )";
+        $db = config::getConnexion();
+        try
+        {  $liste = $db->query($sql);
+            foreach($liste as $row){ }
+            return $row['count(*)'];
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+
+
+    function nombreEffectue($login)
+    {   $dateactuel = date('Y-m-d');
+        $sql="SELECT count(*) from transferts where (etat='Confirmé' and chauffeur='$login'  and date < '$dateactuel' ) ";
+        $db = config::getConnexion();
+        try
+        {  $liste = $db->query($sql);
+            foreach($liste as $row){ }
+            return $row['count(*)'];
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+
+
+
+
+
+}
+
+
+function nombreParMois($login,$month)
+{
+    $sql="SELECT count(*) from transferts where chauffeur='$login' and EXTRACT(MONTH FROM date) = '$month'";
+    $db = config::getConnexion();
+    try
+    {  $liste = $db->query($sql);
+        foreach($liste as $row){ }
+        return $row['count(*)'];
+    }
+    catch (Exception $e)
+    {
+        die('Erreur: '.$e->getMessage());
+    }
+}
+
+function nombreParAnnee($login,$year)
+{
+    $sql="SELECT count(*) from transferts where chauffeur='$login' and EXTRACT(YEAR FROM date) = '$year'";
+    $db = config::getConnexion();
+    try
+    {  $liste = $db->query($sql);
+        foreach($liste as $row){ }
+        return $row['count(*)'];
+    }
+    catch (Exception $e)
+    {
+        die('Erreur: '.$e->getMessage());
+    }
 }

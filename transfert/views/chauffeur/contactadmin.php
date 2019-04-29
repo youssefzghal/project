@@ -183,11 +183,12 @@ if (isset($_SESSION['login']) && isset($_SESSION['motDePasse']))
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <button type="submit" name="ajouter" class="btn btn-fill btn-primary" style="float : right;" >Envoyer</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div class="card-footer">
-                                <button type="submit" name="ajouter" class="btn btn-fill btn-primary" style="float : right;" >Envoyer</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
